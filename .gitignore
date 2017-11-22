@@ -1,0 +1,7 @@
+node_modules
+.tscache
+.DS_Store
+dist
+temp.text
+*.log
+dist

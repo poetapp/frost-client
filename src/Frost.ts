@@ -1,0 +1,138 @@
+import fetch from 'node-fetch'
+import { Path, Method } from './utils/utils'
+
+interface Configuration {
+  host: string
+  email?: string
+  password?: string
+}
+
+export class Frost {
+  private email: string
+  private password: string
+  private host: string
+
+  constructor(config: Configuration) {
+    this.email = config.email
+    this.password = config.password
+    this.host = config.host
+  }
+
+  async create(email?: string, password?: string) {
+    try {
+      const options = {
+        method: Method.POST,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email || this.email,
+          password: password || this.password
+        })
+      }
+
+      const response = await fetch(`${this.host}${Path.ACCOUNT}`, options)
+
+      if (response.ok) return response.json()
+
+      throw await response.text()
+    } catch (e) {
+      throw e
+    }
+  }
+
+  async login(email?: string, password?: string) {
+    try {
+      if (!this.host) throw new Error('Should set the host url')
+
+      const options = {
+        method: Method.POST,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email || this.email,
+          password: password || this.password
+        })
+      }
+
+      const response = await fetch(`${this.host}${Path.LOGIN}`, options)
+
+      if (response.ok) return response.json()
+
+      throw await response.text()
+    } catch (e) {
+      throw e
+    }
+  }
+
+  async verify(link: string) {
+    try {
+      const options = {
+        method: Method.GET,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+
+      const response = await fetch(link, options)
+
+      if (response.ok) return response.text()
+
+      throw await response.text()
+    } catch (e) {
+      throw e
+    }
+  }
+
+  async forgotPassword(email?: string) {
+    try {
+      const options = {
+        method: Method.POST,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: this.email
+        })
+      }
+
+      const response = await fetch(
+        `${this.host}${Path.PASSWORD_RESET}`,
+        options
+      )
+
+      if (response.ok) return response.text()
+
+      throw await response.text()
+    } catch (e) {
+      throw e
+    }
+  }
+
+  async changePassword(token: string, password: string) {
+    try {
+      const options = {
+        method: Method.POST,
+        headers: {
+          'Content-Type': 'application/json',
+          token
+        },
+        body: JSON.stringify({
+          password
+        })
+      }
+
+      const response = await fetch(
+        `${this.host}${Path.PASSWORD_CHANGE}`,
+        options
+      )
+
+      if (response.ok) return response.text()
+
+      throw await response.text()
+    } catch (e) {
+      throw e
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "@poet/frost-client",
+  "version": "0.0.1",
+  "description": "Po.et - Frost client",
+  "main": "Frost.js",
+  "scripts": {
+    "tslint": "tslint -p ./tsconfig.json --fix",
+    "tslint:check": "tslint-config-prettier-check ./tslint.json",
+    "precommit": "lint-staged",
+    "compile": "tsc",
+    "prepublish": "npm run compile"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "tslint",
+      "git add"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/poetapp/frost-client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/poetapp/frost-client/issues"
+  },
+  "homepage": "https://github.com/poetapp/frost-client#readme",
+  "dependencies": {
+    "@types/isomorphic-fetch": "0.0.34",
+    "@types/node-fetch": "^1.6.7",
+    "isomorphic-fetch": "^2.2.1",
+    "node-fetch": "^1.7.3",
+    "typescript": "^2.3.4"
+  },
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "lint-staged": "^4.3.0",
+    "prettier": "^1.7.4",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.8.0",
+    "tslint-config-prettier": "^1.6.0",
+    "tslint-eslint-rules": "^4.1.1",
+    "tslint-plugin-prettier": "^1.3.0"
+  }
+}
