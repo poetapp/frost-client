@@ -8,6 +8,7 @@
     "tslint:check": "tslint-config-prettier-check ./tslint.json",
     "precommit": "lint-staged",
     "compile": "tsc",
+    "postinstall": "npm run compile",
     "prepublish": "npm run compile"
   },
   "lint-staged": {
