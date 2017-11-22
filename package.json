@@ -1,5 +1,5 @@
 {
-  "name": "@poet/frost-client",
+  "name": "@poetapp/frost-client",
   "version": "0.0.1",
   "description": "Po.et - Frost client",
   "main": "Frost.js",
