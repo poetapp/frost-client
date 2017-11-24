@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Po.et - Frost client",
   "main": "dist/Frost.js",
+  "types": "dist/Frost.d.ts",
   "scripts": {
     "tslint": "tslint -p ./tsconfig.json --fix",
     "tslint:check": "tslint-config-prettier-check ./tslint.json",
