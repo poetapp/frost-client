@@ -1,10 +1,19 @@
 import fetch from 'node-fetch'
 import { Path, Method } from './utils/utils'
 
-interface Configuration {
-  host: string
-  email?: string
-  password?: string
+export interface Configuration {
+  readonly host: string
+  readonly email?: string
+  readonly password?: string
+}
+
+export interface WorkAttributes {
+  readonly name: string
+  readonly datePublished: string
+  readonly dateCreated: string
+  readonly author: string
+  readonly tags: string
+  readonly content: string
 }
 
 export class Frost {
@@ -127,6 +136,27 @@ export class Frost {
         `${this.host}${Path.PASSWORD_CHANGE}`,
         options
       )
+
+      if (response.ok) return response.text()
+
+      throw await response.text()
+    } catch (e) {
+      throw e
+    }
+  }
+
+  async work(token: string, work: WorkAttributes) {
+    try {
+      const options = {
+        method: Method.POST,
+        headers: {
+          'Content-Type': 'application/json',
+          token
+        },
+        body: JSON.stringify(work)
+      }
+
+      const response = await fetch(`${this.host}${Path.WORK}`, options)
 
       if (response.ok) return response.text()
 
