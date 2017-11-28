@@ -55,10 +55,7 @@ export class Frost {
     }
   }
 
-  async login(
-    email?: string,
-    password?: string
-  ): Promise<{ token: string } | string> {
+  async login(email?: string, password?: string): Promise<object | string> {
     try {
       if (!this.host) throw new Error('Should set the host url')
 
