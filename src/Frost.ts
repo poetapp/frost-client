@@ -165,4 +165,27 @@ export class Frost {
       throw e
     }
   }
+
+  async getWork(token: string, workId: string) {
+    try {
+      const options = {
+        method: Method.POST,
+        headers: {
+          'Content-Type': 'application/json',
+          token
+        }
+      }
+
+      const response = await fetch(
+        `${this.host}${Path.WORK}/${workId}`,
+        options
+      )
+
+      if (response.ok) return response.json()
+
+      throw await response.text()
+    } catch (e) {
+      throw e
+    }
+  }
 }
