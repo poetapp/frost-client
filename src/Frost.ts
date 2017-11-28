@@ -145,7 +145,10 @@ export class Frost {
     }
   }
 
-  async work(token: string, work: WorkAttributes): Promise<{ workId: string }> {
+  async createWork(
+    token: string,
+    work: WorkAttributes
+  ): Promise<{ workId: string }> {
     try {
       const options = {
         method: Method.POST,
