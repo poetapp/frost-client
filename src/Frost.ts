@@ -20,14 +20,19 @@ export class Frost {
   private email: string
   private password: string
   private host: string
+  private token: string
 
   constructor(config: Configuration) {
     this.email = config.email
     this.password = config.password
     this.host = config.host
+    this.token = ''
   }
 
-  async create(email?: string, password?: string) {
+  async create(
+    email?: string,
+    password?: string
+  ): Promise<{ token: string } | string> {
     try {
       const options = {
         method: Method.POST,
@@ -50,7 +55,10 @@ export class Frost {
     }
   }
 
-  async login(email?: string, password?: string) {
+  async login(
+    email?: string,
+    password?: string
+  ): Promise<{ token: string } | string> {
     try {
       if (!this.host) throw new Error('Should set the host url')
 
@@ -75,7 +83,7 @@ export class Frost {
     }
   }
 
-  async verify(link: string) {
+  async verify(link: string): Promise<string> {
     try {
       const options = {
         method: Method.GET,
@@ -94,7 +102,7 @@ export class Frost {
     }
   }
 
-  async forgotPassword(email?: string) {
+  async forgotPassword(email?: string): Promise<string> {
     try {
       const options = {
         method: Method.POST,
@@ -119,7 +127,7 @@ export class Frost {
     }
   }
 
-  async changePassword(token: string, password: string) {
+  async changePassword(token: string, password: string): Promise<string> {
     try {
       const options = {
         method: Method.POST,
@@ -145,7 +153,10 @@ export class Frost {
     }
   }
 
-  async work(token: string, work: WorkAttributes) {
+  async work(
+    token: string,
+    work: WorkAttributes
+  ): Promise<WorkAttributes | string> {
     try {
       const options = {
         method: Method.POST,
@@ -166,7 +177,10 @@ export class Frost {
     }
   }
 
-  async getWork(token: string, workId: string) {
+  async getWork(
+    token: string,
+    workId: string
+  ): Promise<WorkAttributes | string> {
     try {
       const options = {
         method: Method.POST,
@@ -187,5 +201,9 @@ export class Frost {
     } catch (e) {
       throw e
     }
+  }
+
+  getToken() {
+    return this.token
   }
 }
