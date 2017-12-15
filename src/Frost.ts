@@ -40,7 +40,7 @@ export class Frost {
         })
       }
 
-      const response = await fetch(`${this.host}${Path.ACCOUNT}`, options)
+      const response = await fetch(`${this.host}${Path.ACCOUNTS}`, options)
 
       if (response.ok) return response.json()
 
@@ -159,7 +159,7 @@ export class Frost {
         body: JSON.stringify(work)
       }
 
-      const response = await fetch(`${this.host}${Path.WORK}`, options)
+      const response = await fetch(`${this.host}${Path.WORKS}`, options)
 
       if (response.ok) return response.json()
 
@@ -180,9 +180,29 @@ export class Frost {
       }
 
       const response = await fetch(
-        `${this.host}${Path.WORK}/${workId}`,
+        `${this.host}${Path.WORKS}/${workId}`,
         options
       )
+
+      if (response.ok) return response.json()
+
+      throw await response.text()
+    } catch (e) {
+      throw e
+    }
+  }
+
+  async getWorks(token: string): Promise<ReadonlyArray<WorkAttributes>> {
+    try {
+      const options = {
+        method: Method.GET,
+        headers: {
+          'Content-Type': 'application/json',
+          token
+        }
+      }
+
+      const response = await fetch(`${this.host}${Path.WORKS}`, options)
 
       if (response.ok) return response.json()
 
