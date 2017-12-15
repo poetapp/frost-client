@@ -1,12 +1,12 @@
 export enum Path {
   HOST = 'http://localhost:3000',
-  ACCOUNT = '/account',
-  ACCOUNT_VERIFY = '/account/verify',
-  ACCOUNT_VERIFY_TOKEN = '/account/verify/:token',
+  ACCOUNTS = '/accounts',
+  ACCOUNTS_VERIFY = '/accounts/verify',
+  ACCOUNTS_VERIFY_TOKEN = '/accounts/verify/:token',
   LOGIN = '/login',
   PASSWORD_RESET = '/password/reset',
   PASSWORD_CHANGE = '/password/change',
-  WORK = '/work'
+  WORKS = '/works'
 }
 
 export enum Method {
