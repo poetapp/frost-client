@@ -75,6 +75,29 @@ export class Frost {
     }
   }
 
+  async verifyAccount(token: string): Promise<string> {
+    try {
+      const options = {
+        method: Method.POST,
+        headers: {
+          'Content-Type': 'application/json',
+          token
+        }
+      }
+
+      const response = await fetch(
+        `${this.host}${Path.ACCOUNTS_VERIFY}`,
+        options
+      )
+
+      if (response.ok) return response.text()
+
+      throw await response.text()
+    } catch (e) {
+      throw e
+    }
+  }
+
   async verify(link: string): Promise<string> {
     try {
       const options = {
