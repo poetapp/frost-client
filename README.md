@@ -58,7 +58,7 @@ const { Frost } = require('@poetapp/frost-client')
 import { Frost } from '@poetapp/frost-client'
 
 const config = {
-    host: 'api.frost.po.et.com', // required
+    host: 'api.frost.po.et', // required
     email: 'email@cool.com',
     password: 'xxxxxxx'
 }
