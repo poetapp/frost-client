@@ -31,9 +31,8 @@
   "homepage": "https://github.com/poetapp/frost-client#readme",
   "dependencies": {
     "@types/isomorphic-fetch": "0.0.34",
-    "@types/node-fetch": "^1.6.7",
+    "es6-promise": "^4.2.2",
     "isomorphic-fetch": "^2.2.1",
-    "node-fetch": "^1.7.3",
     "typescript": "^2.3.4"
   },
   "devDependencies": {
