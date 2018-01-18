@@ -1,0 +1,6 @@
+test/
+src/
+coverage/
+*.log
+.editorconfig
+.vscode

@@ -1,4 +1,4 @@
-import fetch from 'node-fetch'
+import * as fetch from 'isomorphic-fetch'
 import { Path, Method } from './utils/utils'
 
 export interface Configuration {
@@ -31,9 +31,9 @@ export class Frost {
     try {
       const options = {
         method: Method.POST,
-        headers: {
+        headers: new Headers({
           'Content-Type': 'application/json'
-        },
+        }),
         body: JSON.stringify({
           email: email || this.email,
           password: password || this.password
@@ -56,9 +56,9 @@ export class Frost {
 
       const options = {
         method: Method.POST,
-        headers: {
+        headers: new Headers({
           'Content-Type': 'application/json'
-        },
+        }),
         body: JSON.stringify({
           email: email || this.email,
           password: password || this.password
@@ -79,10 +79,10 @@ export class Frost {
     try {
       const options = {
         method: Method.POST,
-        headers: {
+        headers: new Headers({
           'Content-Type': 'application/json',
           token
-        }
+        })
       }
 
       const response = await fetch(
@@ -102,9 +102,9 @@ export class Frost {
     try {
       const options = {
         method: Method.GET,
-        headers: {
+        headers: new Headers({
           'Content-Type': 'application/json'
-        }
+        })
       }
 
       const response = await fetch(link, options)
@@ -121,9 +121,9 @@ export class Frost {
     try {
       const options = {
         method: Method.POST,
-        headers: {
+        headers: new Headers({
           'Content-Type': 'application/json'
-        },
+        }),
         body: JSON.stringify({
           email: this.email
         })
@@ -146,10 +146,10 @@ export class Frost {
     try {
       const options = {
         method: Method.POST,
-        headers: {
+        headers: new Headers({
           'Content-Type': 'application/json',
           token
-        },
+        }),
         body: JSON.stringify({
           password
         })
@@ -175,10 +175,10 @@ export class Frost {
     try {
       const options = {
         method: Method.POST,
-        headers: {
+        headers: new Headers({
           'Content-Type': 'application/json',
           token
-        },
+        }),
         body: JSON.stringify(work)
       }
 
@@ -196,10 +196,10 @@ export class Frost {
     try {
       const options = {
         method: Method.GET,
-        headers: {
+        headers: new Headers({
           'Content-Type': 'application/json',
           token
-        }
+        })
       }
 
       const response = await fetch(
@@ -219,10 +219,10 @@ export class Frost {
     try {
       const options = {
         method: Method.GET,
-        headers: {
+        headers: new Headers({
           'Content-Type': 'application/json',
           token
-        }
+        })
       }
 
       const response = await fetch(`${this.host}${Path.WORKS}`, options)

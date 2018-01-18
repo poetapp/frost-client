@@ -8,7 +8,7 @@
     "tslint": "tslint -p ./tsconfig.json --fix",
     "tslint:check": "tslint-config-prettier-check ./tslint.json",
     "precommit": "lint-staged",
-    "compile": "tsc --skipLibCheck",
+    "compile": "tsc",
     "postinstall": "npm run compile",
     "prepublish": "npm run compile"
   },
