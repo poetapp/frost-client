@@ -9,7 +9,12 @@
     "experimentalDecorators": true,
     "sourceMap": false,
     "outDir": "./dist",
-    "declaration": true
+    "declaration": true,
+    "lib": [
+      "dom",
+      "es2017",
+      "esnext.asynciterable"
+    ]
   },
   "include": [
     "./src/**/*"
