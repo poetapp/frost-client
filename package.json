@@ -1,6 +1,6 @@
 {
   "name": "@poetapp/frost-client",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Po.et - Frost client",
   "main": "dist/Frost.js",
   "types": "dist/Frost.d.ts",
@@ -10,7 +10,6 @@
     "tslint:check": "tslint-config-prettier-check ./tslint.json",
     "precommit": "lint-staged",
     "compile": "tsc --skipLibCheck",
-    "postinstall": "npm run compile",
     "prepublish": "npm run compile"
   },
   "lint-staged": {
