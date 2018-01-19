@@ -9,7 +9,10 @@
     "experimentalDecorators": true,
     "sourceMap": false,
     "outDir": "./dist",
-    "declaration": true
+    "declaration": true,
+    "typeRoots": [
+      "../node_modules/@types"
+    ]
   },
   "include": [
     "./src/**/*"
