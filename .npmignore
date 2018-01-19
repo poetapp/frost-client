@@ -1,5 +1,8 @@
 test/
 coverage/
+src/
 *.log
 .editorconfig
 .vscode
+tsconfig.json
+tslint.json
