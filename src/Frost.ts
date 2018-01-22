@@ -234,4 +234,26 @@ export class Frost {
       throw e
     }
   }
+
+  async getApiTokens(
+    token: string
+  ): Promise<ReadonlyArray<{ apiToken: string; dateCreated: string }>> {
+    try {
+      const options = {
+        method: Method.GET,
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          token
+        })
+      }
+
+      const response = await fetch(`${this.host}${Path.TOKENS}`, options)
+
+      if (response.ok) return response.json()
+
+      throw await response.text()
+    } catch (e) {
+      throw e
+    }
+  }
 }
