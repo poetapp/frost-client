@@ -125,7 +125,7 @@ export class Frost {
           'Content-Type': 'application/json'
         }),
         body: JSON.stringify({
-          email: this.email
+          email: email || this.email
         })
       }
 
