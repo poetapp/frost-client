@@ -75,7 +75,7 @@ export class Frost {
     }
   }
 
-  async verifyAccount(token: string): Promise<string> {
+  async sendEmailVerifyAccount(token: string): Promise<string> {
     try {
       const options = {
         method: Method.POST,
@@ -98,7 +98,7 @@ export class Frost {
     }
   }
 
-  async verify(link: string): Promise<string> {
+  async verifyAccount(token: string): Promise<string> {
     try {
       const options = {
         method: Method.GET,
@@ -107,7 +107,10 @@ export class Frost {
         })
       }
 
-      const response = await fetch(link, options)
+      const response = await fetch(
+        `${this.host}${Path.ACCOUNTS_VERIFY}/${token}`,
+        options
+      )
 
       if (response.ok) return response.text()
 
