@@ -12,7 +12,7 @@ export interface WorkAttributes {
   readonly datePublished: string
   readonly dateCreated: string
   readonly author: string
-  readonly tags: string
+  readonly tags?: string
   readonly content: string
 }
 
@@ -120,7 +120,7 @@ export class Frost {
     }
   }
 
-  async forgotPassword(email?: string): Promise<string> {
+  async sendEmailForgotPassword(email?: string): Promise<string> {
     try {
       const options = {
         method: Method.POST,

@@ -12,8 +12,8 @@ The Frost client is an npm package. This package exposes the methods for communi
     - [Initialization](#initialization)
     - [create](#create)
     - [login](#login)
-    - [verifyAccount](#verify-account)
-    - [forgotPassword](#forgot-password)
+    - [sendEmailVerifyAccount](#send-email-verify-account)
+    - [sendEmailForgotPassword](#send-email-forgot-password)
     - [changePassword](#change-password)
     - [createWork](#create-work)
     - [getWork](#get-work)
@@ -76,7 +76,7 @@ Example with async/await
 
 ```javascript
 
-const createFrostAccount = async() => {
+const createAccount = async() => {
     try {
 
         // if you set email and password in your config, you only need to do this.
@@ -94,7 +94,7 @@ const createFrostAccount = async() => {
 
 }
 
-createFrostAccount()
+createAccount()
 
 ```
 
@@ -106,7 +106,7 @@ Example with async/await
 
 ```javascript
 
-const loginFrostAccount = async() => {
+const loginAccount = async() => {
     try {
 
         // if you set email and password in your config, you only need to do this.
@@ -124,11 +124,11 @@ const loginFrostAccount = async() => {
 
 }
 
-loginFrostAccount()
+loginAccount()
 
 ```
 
-## Verify account
+## Send email verify account
 
 With this method, Frost will send the email to verify your email account. This action is required to create works.
 
@@ -136,10 +136,10 @@ Example with async/await
 
 ```javascript
 
-const verifyFrostAccount = async() => {
+const sendEmailVerifyAccount = async() => {
     try {
 
-       await frost.verifyAccount(token)
+       await frost.sendEmailVerifyAccount(token)
 
     } catch(e) {
         console.log(e)
@@ -147,28 +147,28 @@ const verifyFrostAccount = async() => {
 
 }
 
-verifyFrostAccount()
+sendEmailVerifyAccount()
 
 ```
 
 
-## Forgot password
+## Send email forgot password
 
-With this method, you will be able to change your password. Frost will send an email with a new token for you use the method ** frost.changePassword **. The method forgotPassword is a promise if occur an error it will throw an error message.
+With this method, you will be able to change your password. Frost will send an email with a new token for you use the method ** frost.changePassword **. The method sendEmailForgotPassword is a promise if occur an error it will throw an error message.
 
 Example with async/await
 
 ```javascript
 
-const forgotFrostPassword = async() => {
+const sendEmailForgotPassword = async() => {
     try {
 
         // if you set email and password in your config, you only need to do this.
-        await frost.forgotPassword()
+        await frost.sendEmailForgotPassword()
         
         /* if not...
         
-        await frost.forgotPassword('email@cool.com')
+        await frost.sendEmailForgotPassword('email@cool.com')
 
         */
 
@@ -178,7 +178,7 @@ const forgotFrostPassword = async() => {
 
 }
 
-forgotFrostPassword()
+sendEmailForgotPassword()
 
 ```
 
@@ -192,9 +192,7 @@ Example with async/await
 ```javascript
 
 const changeFrostPassword = async() => {
-    try {
-
-        const newPassword = 'xxxxxxx'
+    try {onst newPassword = 'xxxxxxx'
         await frost.changePassword(token, newPassword)
 
     } catch(e) {
@@ -203,7 +201,7 @@ const changeFrostPassword = async() => {
 
 }
 
-changeFrostPassword()
+changePassword()
 
 ```
 
