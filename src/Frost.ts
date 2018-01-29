@@ -259,4 +259,29 @@ export class Frost {
       throw e
     }
   }
+
+  async getProfile(
+    token: string
+  ): Promise<{ createdAt: number; verified: boolean }> {
+    try {
+      const options = {
+        method: Method.GET,
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          token
+        })
+      }
+
+      const response = await fetch(
+        `${this.host}${Path.ACCOUNTS_PROFILE}`,
+        options
+      )
+
+      if (response.ok) return response.json()
+
+      throw await response.text()
+    } catch (e) {
+      throw e
+    }
+  }
 }

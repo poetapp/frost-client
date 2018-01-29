@@ -7,7 +7,8 @@ export enum Path {
   PASSWORD_RESET = '/password/reset',
   PASSWORD_CHANGE = '/password/change',
   WORKS = '/works',
-  TOKENS = '/tokens'
+  TOKENS = '/tokens',
+  ACCOUNTS_PROFILE = '/accounts/profile'
 }
 
 export enum Method {
