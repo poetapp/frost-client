@@ -192,8 +192,10 @@ Example with async/await
 ```javascript
 
 const changeFrostPassword = async() => {
-    try {onst newPassword = 'xxxxxxx'
-        await frost.changePassword(token, newPassword)
+    try {
+        const password = 'xxxxxxx'
+        const oldPassword = 'yyyyyyy'
+        await frost.changePassword(token, password, oldPassword)
 
     } catch(e) {
         console.log(e)

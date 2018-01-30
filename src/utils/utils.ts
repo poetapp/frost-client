@@ -6,6 +6,7 @@ export enum Path {
   LOGIN = '/login',
   PASSWORD_RESET = '/password/reset',
   PASSWORD_CHANGE = '/password/change',
+  PASSWORD_CHANGE_TOKEN = '/password/change/token',
   WORKS = '/works',
   TOKENS = '/tokens',
   ACCOUNTS_PROFILE = '/accounts/profile'

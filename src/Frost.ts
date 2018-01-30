@@ -145,7 +145,41 @@ export class Frost {
     }
   }
 
-  async changePassword(token: string, password: string): Promise<string> {
+  async changePassword(
+    token: string,
+    password: string,
+    oldPassword: string
+  ): Promise<string> {
+    try {
+      const options = {
+        method: Method.POST,
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          token
+        }),
+        body: JSON.stringify({
+          password,
+          oldPassword
+        })
+      }
+
+      const response = await fetch(
+        `${this.host}${Path.PASSWORD_CHANGE}`,
+        options
+      )
+
+      if (response.ok) return response.text()
+
+      throw await response.text()
+    } catch (e) {
+      throw e
+    }
+  }
+
+  async changePasswordWithToken(
+    token: string,
+    password: string
+  ): Promise<string> {
     try {
       const options = {
         method: Method.POST,
@@ -159,7 +193,7 @@ export class Frost {
       }
 
       const response = await fetch(
-        `${this.host}${Path.PASSWORD_CHANGE}`,
+        `${this.host}${Path.PASSWORD_CHANGE_TOKEN}`,
         options
       )
 
