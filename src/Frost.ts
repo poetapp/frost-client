@@ -197,7 +197,7 @@ export class Frost {
         options
       )
 
-      if (response.ok) return response.text()
+      if (response.ok) return response.json()
 
       throw await response.text()
     } catch (e) {
