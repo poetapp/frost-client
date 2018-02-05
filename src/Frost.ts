@@ -98,7 +98,7 @@ export class Frost {
     }
   }
 
-  async verifyAccount(token: string): Promise<string> {
+  async verifyAccount(token: string): Promise<{ token: string }> {
     try {
       const options = {
         method: Method.GET,
@@ -112,7 +112,7 @@ export class Frost {
         options
       )
 
-      if (response.ok) return response.text()
+      if (response.ok) return response.json()
 
       throw await response.text()
     } catch (e) {
@@ -179,7 +179,7 @@ export class Frost {
   async changePasswordWithToken(
     token: string,
     password: string
-  ): Promise<string> {
+  ): Promise<{ token: string }> {
     try {
       const options = {
         method: Method.POST,
