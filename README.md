@@ -60,7 +60,8 @@ import { Frost } from '@poetapp/frost-client'
 const config = {
     host: 'api.frost.po.et', // required
     email: 'email@cool.com',
-    password: 'xxxxxxx'
+    password: 'xxxxxxx',
+    timeout: 10 // default 10 seconds
 }
 
 const frost = new Frost(config)

@@ -5,6 +5,7 @@ export interface Configuration {
   readonly host: string
   readonly email?: string
   readonly password?: string
+  readonly timeout?: number
 }
 
 export interface WorkAttributes {
@@ -20,302 +21,316 @@ export class Frost {
   private email: string
   private password: string
   private host: string
+  private timeout: number
 
   constructor(config: Configuration) {
     this.email = config.email
     this.password = config.password
     this.host = config.host
+    this.timeout = config.timeout || 10
   }
 
-  async create(email?: string, password?: string): Promise<{ token: string }> {
-    try {
-      const options = {
-        method: Method.POST,
-        headers: new Headers({
-          'Content-Type': 'application/json'
-        }),
-        body: JSON.stringify({
-          email: email || this.email,
-          password: password || this.password
-        })
-      }
-
-      const response = await fetch(`${this.host}${Path.ACCOUNTS}`, options)
-
-      if (response.ok) return response.json()
-
-      throw await response.text()
-    } catch (e) {
-      throw e
-    }
-  }
-
-  async login(email?: string, password?: string): Promise<{ token: string }> {
-    try {
-      if (!this.host) throw new Error('Should set the host url')
-
-      const options = {
-        method: Method.POST,
-        headers: new Headers({
-          'Content-Type': 'application/json'
-        }),
-        body: JSON.stringify({
-          email: email || this.email,
-          password: password || this.password
-        })
-      }
-
-      const response = await fetch(`${this.host}${Path.LOGIN}`, options)
-
-      if (response.ok) return response.json()
-
-      throw await response.text()
-    } catch (e) {
-      throw e
-    }
-  }
-
-  async sendEmailVerifyAccount(token: string): Promise<string> {
-    try {
-      const options = {
-        method: Method.POST,
-        headers: new Headers({
-          'Content-Type': 'application/json',
-          token
-        })
-      }
-
-      const response = await fetch(
-        `${this.host}${Path.ACCOUNTS_VERIFY}`,
-        options
+  timeoutPromise(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      setTimeout(
+        () =>
+          reject(
+            'That last request took too long. Please try again in a few seconds.'
+          ),
+        1000 * this.timeout
       )
-
-      if (response.ok) return response.text()
-
-      throw await response.text()
-    } catch (e) {
-      throw e
-    }
+    })
   }
 
-  async verifyAccount(token: string): Promise<{ token: string }> {
-    try {
-      const options = {
-        method: Method.GET,
-        headers: new Headers({
-          'Content-Type': 'application/json'
-        })
-      }
-
-      const response = await fetch(
-        `${this.host}${Path.ACCOUNTS_VERIFY}/${token}`,
-        options
-      )
-
-      if (response.ok) return response.json()
-
-      throw await response.text()
-    } catch (e) {
-      throw e
+  create(email?: string, password?: string): Promise<{ token: string }> {
+    const options = {
+      method: Method.POST,
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify({
+        email: email || this.email,
+        password: password || this.password
+      })
     }
+
+    const request = fetch(`${this.host}${Path.ACCOUNTS}`, options)
+
+    return Promise.race([request, this.timeoutPromise()])
+      .then(async (value: any) => {
+        if (value.ok) return await value.json()
+
+        throw await value.text()
+      })
+      .catch(e => {
+        throw e
+      })
   }
 
-  async sendEmailForgotPassword(email?: string): Promise<string> {
-    try {
-      const options = {
-        method: Method.POST,
-        headers: new Headers({
-          'Content-Type': 'application/json'
-        }),
-        body: JSON.stringify({
-          email: email || this.email
-        })
-      }
+  login(email?: string, password?: string): Promise<{ token: string }> {
+    if (!this.host) throw new Error('Should set the host url')
 
-      const response = await fetch(
-        `${this.host}${Path.PASSWORD_RESET}`,
-        options
-      )
-
-      if (response.ok) return response.text()
-
-      throw await response.text()
-    } catch (e) {
-      throw e
+    const options = {
+      method: Method.POST,
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify({
+        email: email || this.email,
+        password: password || this.password
+      })
     }
+
+    const request = fetch(`${this.host}${Path.LOGIN}`, options)
+
+    return Promise.race([request, this.timeoutPromise()])
+      .then(async (value: any) => {
+        if (value.ok) return await value.json()
+
+        throw await value.text()
+      })
+      .catch(e => {
+        throw e
+      })
   }
 
-  async changePassword(
+  sendEmailVerifyAccount(token: string): Promise<string> {
+    const options = {
+      method: Method.POST,
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        token
+      })
+    }
+
+    const request = fetch(`${this.host}${Path.ACCOUNTS_VERIFY}`, options)
+
+    return Promise.race([request, this.timeoutPromise()])
+      .then(async (value: any) => {
+        if (value.ok) return await value.text()
+
+        throw await value.text()
+      })
+      .catch(e => {
+        throw e
+      })
+  }
+
+  verifyAccount(token: string): Promise<{ token: string }> {
+    const options = {
+      method: Method.GET,
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    }
+
+    const request = fetch(
+      `${this.host}${Path.ACCOUNTS_VERIFY}/${token}`,
+      options
+    )
+
+    return Promise.race([request, this.timeoutPromise()])
+      .then(async (value: any) => {
+        if (value.ok) return await value.json()
+
+        throw await value.text()
+      })
+      .catch(e => {
+        throw e
+      })
+  }
+
+  sendEmailForgotPassword(email?: string): Promise<string> {
+    const options = {
+      method: Method.POST,
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify({
+        email: email || this.email
+      })
+    }
+
+    const request = fetch(`${this.host}${Path.PASSWORD_RESET}`, options)
+
+    return Promise.race([request, this.timeoutPromise()])
+      .then(async (value: any) => {
+        if (value.ok) return await value.text()
+
+        throw await value.text()
+      })
+      .catch(e => {
+        throw e
+      })
+  }
+
+  changePassword(
     token: string,
     password: string,
     oldPassword: string
   ): Promise<string> {
-    try {
-      const options = {
-        method: Method.POST,
-        headers: new Headers({
-          'Content-Type': 'application/json',
-          token
-        }),
-        body: JSON.stringify({
-          password,
-          oldPassword
-        })
-      }
-
-      const response = await fetch(
-        `${this.host}${Path.PASSWORD_CHANGE}`,
-        options
-      )
-
-      if (response.ok) return response.text()
-
-      throw await response.text()
-    } catch (e) {
-      throw e
+    const options = {
+      method: Method.POST,
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        token
+      }),
+      body: JSON.stringify({
+        password,
+        oldPassword
+      })
     }
+
+    const request = fetch(`${this.host}${Path.PASSWORD_CHANGE}`, options)
+    return Promise.race([request, this.timeoutPromise()])
+      .then(async (value: any) => {
+        if (value.ok) return await value.text()
+
+        throw await value.text()
+      })
+      .catch(e => {
+        throw e
+      })
   }
 
-  async changePasswordWithToken(
+  changePasswordWithToken(
     token: string,
     password: string
   ): Promise<{ token: string }> {
-    try {
-      const options = {
-        method: Method.POST,
-        headers: new Headers({
-          'Content-Type': 'application/json',
-          token
-        }),
-        body: JSON.stringify({
-          password
-        })
-      }
-
-      const response = await fetch(
-        `${this.host}${Path.PASSWORD_CHANGE_TOKEN}`,
-        options
-      )
-
-      if (response.ok) return response.json()
-
-      throw await response.text()
-    } catch (e) {
-      throw e
+    const options = {
+      method: Method.POST,
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        token
+      }),
+      body: JSON.stringify({
+        password
+      })
     }
+
+    const request = fetch(`${this.host}${Path.PASSWORD_CHANGE_TOKEN}`, options)
+
+    return Promise.race([request, this.timeoutPromise()])
+      .then(async (value: any) => {
+        if (value.ok) return await value.json()
+
+        throw await value.text()
+      })
+      .catch(e => {
+        throw e
+      })
   }
 
-  async createWork(
-    token: string,
-    work: WorkAttributes
-  ): Promise<{ workId: string }> {
-    try {
-      const options = {
-        method: Method.POST,
-        headers: new Headers({
-          'Content-Type': 'application/json',
-          token
-        }),
-        body: JSON.stringify(work)
-      }
-
-      const response = await fetch(`${this.host}${Path.WORKS}`, options)
-
-      if (response.ok) return response.json()
-
-      throw await response.text()
-    } catch (e) {
-      throw e
+  createWork(token: string, work: WorkAttributes): Promise<{ workId: string }> {
+    const options = {
+      method: Method.POST,
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        token
+      }),
+      body: JSON.stringify(work)
     }
+
+    const request = fetch(`${this.host}${Path.WORKS}`, options)
+
+    return Promise.race([request, this.timeoutPromise()])
+      .then(async (value: any) => {
+        if (value.ok) return await value.json()
+
+        throw await value.text()
+      })
+      .catch(e => {
+        throw e
+      })
   }
 
-  async getWork(token: string, workId: string): Promise<WorkAttributes> {
-    try {
-      const options = {
-        method: Method.GET,
-        headers: new Headers({
-          'Content-Type': 'application/json',
-          token
-        })
-      }
-
-      const response = await fetch(
-        `${this.host}${Path.WORKS}/${workId}`,
-        options
-      )
-
-      if (response.ok) return response.json()
-
-      throw await response.text()
-    } catch (e) {
-      throw e
+  getWork(token: string, workId: string): Promise<WorkAttributes> {
+    const options = {
+      method: Method.GET,
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        token
+      })
     }
+
+    const request = fetch(`${this.host}${Path.WORKS}/${workId}`, options)
+
+    return Promise.race([request, this.timeoutPromise()])
+      .then(async (value: any) => {
+        if (value.ok) return await value.json()
+
+        throw await value.text()
+      })
+      .catch(e => {
+        throw e
+      })
   }
 
-  async getWorks(token: string): Promise<ReadonlyArray<WorkAttributes>> {
-    try {
-      const options = {
-        method: Method.GET,
-        headers: new Headers({
-          'Content-Type': 'application/json',
-          token
-        })
-      }
-
-      const response = await fetch(`${this.host}${Path.WORKS}`, options)
-
-      if (response.ok) return response.json()
-
-      throw await response.text()
-    } catch (e) {
-      throw e
+  getWorks(token: string): Promise<ReadonlyArray<WorkAttributes>> {
+    const options = {
+      method: Method.GET,
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        token
+      })
     }
+
+    const request = fetch(`${this.host}${Path.WORKS}`, options)
+
+    return Promise.race([request, this.timeoutPromise()])
+      .then(async (value: any) => {
+        if (value.ok) return await value.json()
+
+        throw await value.text()
+      })
+      .catch(e => {
+        throw e
+      })
   }
 
-  async getApiTokens(
+  getApiTokens(
     token: string
   ): Promise<ReadonlyArray<{ apiToken: string; dateCreated: string }>> {
-    try {
-      const options = {
-        method: Method.GET,
-        headers: new Headers({
-          'Content-Type': 'application/json',
-          token
-        })
-      }
-
-      const response = await fetch(`${this.host}${Path.TOKENS}`, options)
-
-      if (response.ok) return response.json()
-
-      throw await response.text()
-    } catch (e) {
-      throw e
+    const options = {
+      method: Method.GET,
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        token
+      })
     }
+
+    const request = fetch(`${this.host}${Path.TOKENS}`, options)
+
+    return Promise.race([request, this.timeoutPromise()])
+      .then(async (value: any) => {
+        if (value.ok) return await value.json()
+
+        throw await value.text()
+      })
+      .catch(e => {
+        throw e
+      })
   }
 
-  async getProfile(
-    token: string
-  ): Promise<{ createdAt: number; verified: boolean }> {
-    try {
-      const options = {
-        method: Method.GET,
-        headers: new Headers({
-          'Content-Type': 'application/json',
-          token
-        })
-      }
-
-      const response = await fetch(
-        `${this.host}${Path.ACCOUNTS_PROFILE}`,
-        options
-      )
-
-      if (response.ok) return response.json()
-
-      throw await response.text()
-    } catch (e) {
-      throw e
+  getProfile(token: string): Promise<{ createdAt: number; verified: boolean }> {
+    const options = {
+      method: Method.GET,
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        token
+      })
     }
+
+    const request = fetch(`${this.host}${Path.ACCOUNTS_PROFILE}`, options)
+
+    return Promise.race([request, this.timeoutPromise()])
+      .then(async (value: any) => {
+        if (value.ok) return await value.json()
+
+        throw await value.text()
+      })
+      .catch(e => {
+        throw e
+      })
   }
 }
