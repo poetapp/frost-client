@@ -13,6 +13,9 @@ The Frost Client helps easily integrate your applications with the Frost API.
     - [Get Work By ID](#get-work-by-id)
     - [Get All Works](#get-all-works)
 
+## Gitter
+For any questions about developing an application that integrates with Frost or contributing to Po.et that aren't answered here check out our Gitter community at https://gitter.im/poetapp.
+
 ## Getting Started
 
 ### Install
