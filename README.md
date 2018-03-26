@@ -93,7 +93,7 @@ createWork()
 Returns a promise with Frost's response. Throws in case of errors.
 
 ```javascript
-async function getWork {
+async function getWork () {
   try {
     const workId = '123456'
     const work = await frost.getWork(token, workId)
@@ -110,7 +110,7 @@ getWork()
 Returns a promise with Frost's response. Throws in case of errors.
 
 ```javascript
-const getAllWorks = async() => {
+const getAllWorks = async () => {
   try {
     const works = await frost.getWorks(token)
   } catch(e) {
