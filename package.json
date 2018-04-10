@@ -1,6 +1,6 @@
 {
   "name": "@poetapp/frost-client",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Po.et - Frost client",
   "main": "dist/Frost.js",
   "types": "dist/Frost.d.ts",

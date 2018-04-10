@@ -30,7 +30,7 @@ export class Frost {
     this.timeout = config.timeout || 10
   }
 
-  timeoutPromise(): Promise<any> {
+  timeoutPromise(): Promise<Response> {
     return new Promise((resolve, reject) => {
       setTimeout(
         () =>
@@ -310,6 +310,22 @@ export class Frost {
       .catch(e => {
         throw e
       })
+  }
+
+  async createApiToken(token: string): Promise<{ apiToken: string }> {
+    const options = {
+      method: Method.POST,
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        token
+      })
+    }
+
+    const request = fetch(`${this.host}${Path.TOKENS}`, options)
+
+    const response = await Promise.race([request, this.timeoutPromise()])
+    if (response.ok) return await response.json()
+    throw await response.text()
   }
 
   getProfile(token: string): Promise<{ createdAt: number; verified: boolean }> {
