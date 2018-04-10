@@ -288,9 +288,7 @@ export class Frost {
       })
   }
 
-  getApiTokens(
-    token: string
-  ): Promise<ReadonlyArray<{ apiToken: string; dateCreated: string }>> {
+  getApiTokens(token: string): Promise<{ apiTokens: ReadonlyArray<string> }> {
     const options = {
       method: Method.GET,
       headers: new Headers({
@@ -312,6 +310,22 @@ export class Frost {
       })
   }
 
+  async removeApiToken(token: string, tokenId: string): Promise<string> {
+    const options = {
+      method: Method.DEL,
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        token
+      })
+    }
+
+    const request = fetch(`${this.host}${Path.TOKENS}/${tokenId}`, options)
+
+    const response = await Promise.race([request, this.timeoutPromise()])
+    if (response.ok) return await response.text()
+    throw await response.text()
+  }
+
   async createApiToken(token: string): Promise<{ apiToken: string }> {
     const options = {
       method: Method.POST,
@@ -320,7 +334,6 @@ export class Frost {
         token
       })
     }
-
     const request = fetch(`${this.host}${Path.TOKENS}`, options)
 
     const response = await Promise.race([request, this.timeoutPromise()])

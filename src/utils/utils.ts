@@ -9,6 +9,7 @@ export enum Path {
   PASSWORD_CHANGE_TOKEN = '/password/change/token',
   WORKS = '/works',
   TOKENS = '/tokens',
+  TOKENS_TOKENID = '/tokens/:tokenId',
   ACCOUNTS_PROFILE = '/accounts/profile'
 }
 
@@ -16,6 +17,6 @@ export enum Method {
   POST = 'post',
   GET = 'get',
   PUT = 'put',
-  DEL = 'del',
+  DEL = 'delete',
   ALL = 'all'
 }
