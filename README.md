@@ -23,11 +23,11 @@ For any questions about developing an application that integrates with Frost or 
 Install Frost Client from the NPM repository or directly from this GitHub repository:
 
 ```bash
-$ npm install @poetapp/frost-client
+$ npm install @po.et/frost-client
 ```
 
 ```bash
-$ yarn add @poetapp/frost-client
+$ yarn add @po.et/frost-client
 ```
 
 ```bash
@@ -38,17 +38,17 @@ $ cd frost-client && npm link
 ### Import
 
 ```javascript
-import { Frost } from '@poetapp/frost-client'
+import { Frost } from '@po.et/frost-client'
 ```
 
 ```javascript
-const { Frost } = require('@poetapp/frost-client')
+const { Frost } = require('@po.et/frost-client')
 ```
 
 ### Initialize
 
 ```javascript
-import { Frost } from '@poetapp/frost-client'
+import { Frost } from '@po.et/frost-client'
 
 const config = {
   host: 'https://api.frost.po.et', // required
