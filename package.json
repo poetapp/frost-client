@@ -6,6 +6,7 @@
   "types": "dist/Frost.d.ts",
   "scripts": {
     "build": "tsc",
+    "lint": "tslint -p ./tsconfig.json",
     "tslint": "tslint -p ./tsconfig.json --fix",
     "tslint:check": "tslint-config-prettier-check ./tslint.json",
     "precommit": "lint-staged",
