@@ -18,10 +18,10 @@ export interface WorkAttributes {
 }
 
 export class Frost {
-  private email: string
-  private password: string
-  private host: string
-  private timeout: number
+  private readonly email: string
+  private readonly password: string
+  private readonly host: string
+  private readonly timeout: number
 
   constructor(config: Configuration) {
     this.email = config.email
@@ -42,7 +42,10 @@ export class Frost {
     })
   }
 
-  create(email?: string, password?: string): Promise<{ token: string }> {
+  create(
+    email?: string,
+    password?: string
+  ): Promise<{ readonly token: string }> {
     const options = {
       method: Method.POST,
       headers: new Headers({
@@ -67,7 +70,10 @@ export class Frost {
       })
   }
 
-  login(email?: string, password?: string): Promise<{ token: string }> {
+  login(
+    email?: string,
+    password?: string
+  ): Promise<{ readonly token: string }> {
     if (!this.host) throw new Error('Should set the host url')
 
     const options = {
@@ -116,7 +122,7 @@ export class Frost {
       })
   }
 
-  verifyAccount(token: string): Promise<{ token: string }> {
+  verifyAccount(token: string): Promise<{ readonly token: string }> {
     const options = {
       method: Method.GET,
       headers: new Headers({
@@ -196,7 +202,7 @@ export class Frost {
   changePasswordWithToken(
     token: string,
     password: string
-  ): Promise<{ token: string }> {
+  ): Promise<{ readonly token: string }> {
     const options = {
       method: Method.POST,
       headers: new Headers({
@@ -221,7 +227,10 @@ export class Frost {
       })
   }
 
-  createWork(token: string, work: WorkAttributes): Promise<{ workId: string }> {
+  createWork(
+    token: string,
+    work: WorkAttributes
+  ): Promise<{ readonly workId: string }> {
     const options = {
       method: Method.POST,
       headers: new Headers({
@@ -288,7 +297,9 @@ export class Frost {
       })
   }
 
-  getApiTokens(token: string): Promise<{ apiTokens: ReadonlyArray<string> }> {
+  getApiTokens(
+    token: string
+  ): Promise<{ readonly apiTokens: ReadonlyArray<string> }> {
     const options = {
       method: Method.GET,
       headers: new Headers({
@@ -326,7 +337,7 @@ export class Frost {
     throw await response.text()
   }
 
-  async createApiToken(token: string): Promise<{ apiToken: string }> {
+  async createApiToken(token: string): Promise<{ readonly apiToken: string }> {
     const options = {
       method: Method.POST,
       headers: new Headers({
@@ -341,7 +352,9 @@ export class Frost {
     throw await response.text()
   }
 
-  getProfile(token: string): Promise<{ createdAt: number; verified: boolean }> {
+  getProfile(
+    token: string
+  ): Promise<{ readonly createdAt: number; readonly verified: boolean }> {
     const options = {
       method: Method.GET,
       headers: new Headers({
