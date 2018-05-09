@@ -33,28 +33,22 @@ export class Frost {
   timeoutPromise(): Promise<Response> {
     return new Promise((resolve, reject) => {
       setTimeout(
-        () =>
-          reject(
-            'That last request took too long. Please try again in a few seconds.'
-          ),
+        () => reject('That last request took too long. Please try again in a few seconds.'),
         1000 * this.timeout
       )
     })
   }
 
-  create(
-    email?: string,
-    password?: string
-  ): Promise<{ readonly token: string }> {
+  create(email?: string, password?: string): Promise<{ readonly token: string }> {
     const options = {
       method: Method.POST,
       headers: new Headers({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       }),
       body: JSON.stringify({
         email: email || this.email,
-        password: password || this.password
-      })
+        password: password || this.password,
+      }),
     }
 
     const request = fetch(`${this.host}${Path.ACCOUNTS}`, options)
@@ -70,21 +64,18 @@ export class Frost {
       })
   }
 
-  login(
-    email?: string,
-    password?: string
-  ): Promise<{ readonly token: string }> {
+  login(email?: string, password?: string): Promise<{ readonly token: string }> {
     if (!this.host) throw new Error('Should set the host url')
 
     const options = {
       method: Method.POST,
       headers: new Headers({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       }),
       body: JSON.stringify({
         email: email || this.email,
-        password: password || this.password
-      })
+        password: password || this.password,
+      }),
     }
 
     const request = fetch(`${this.host}${Path.LOGIN}`, options)
@@ -105,8 +96,8 @@ export class Frost {
       method: Method.POST,
       headers: new Headers({
         'Content-Type': 'application/json',
-        token
-      })
+        token,
+      }),
     }
 
     const request = fetch(`${this.host}${Path.ACCOUNTS_VERIFY}`, options)
@@ -126,14 +117,11 @@ export class Frost {
     const options = {
       method: Method.GET,
       headers: new Headers({
-        'Content-Type': 'application/json'
-      })
+        'Content-Type': 'application/json',
+      }),
     }
 
-    const request = fetch(
-      `${this.host}${Path.ACCOUNTS_VERIFY}/${token}`,
-      options
-    )
+    const request = fetch(`${this.host}${Path.ACCOUNTS_VERIFY}/${token}`, options)
 
     return Promise.race([request, this.timeoutPromise()])
       .then(async (value: any) => {
@@ -150,11 +138,11 @@ export class Frost {
     const options = {
       method: Method.POST,
       headers: new Headers({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       }),
       body: JSON.stringify({
-        email: email || this.email
-      })
+        email: email || this.email,
+      }),
     }
 
     const request = fetch(`${this.host}${Path.PASSWORD_RESET}`, options)
@@ -170,21 +158,17 @@ export class Frost {
       })
   }
 
-  changePassword(
-    token: string,
-    password: string,
-    oldPassword: string
-  ): Promise<string> {
+  changePassword(token: string, password: string, oldPassword: string): Promise<string> {
     const options = {
       method: Method.POST,
       headers: new Headers({
         'Content-Type': 'application/json',
-        token
+        token,
       }),
       body: JSON.stringify({
         password,
-        oldPassword
-      })
+        oldPassword,
+      }),
     }
 
     const request = fetch(`${this.host}${Path.PASSWORD_CHANGE}`, options)
@@ -199,19 +183,16 @@ export class Frost {
       })
   }
 
-  changePasswordWithToken(
-    token: string,
-    password: string
-  ): Promise<{ readonly token: string }> {
+  changePasswordWithToken(token: string, password: string): Promise<{ readonly token: string }> {
     const options = {
       method: Method.POST,
       headers: new Headers({
         'Content-Type': 'application/json',
-        token
+        token,
       }),
       body: JSON.stringify({
-        password
-      })
+        password,
+      }),
     }
 
     const request = fetch(`${this.host}${Path.PASSWORD_CHANGE_TOKEN}`, options)
@@ -227,17 +208,14 @@ export class Frost {
       })
   }
 
-  createWork(
-    token: string,
-    work: WorkAttributes
-  ): Promise<{ readonly workId: string }> {
+  createWork(token: string, work: WorkAttributes): Promise<{ readonly workId: string }> {
     const options = {
       method: Method.POST,
       headers: new Headers({
         'Content-Type': 'application/json',
-        token
+        token,
       }),
-      body: JSON.stringify(work)
+      body: JSON.stringify(work),
     }
 
     const request = fetch(`${this.host}${Path.WORKS}`, options)
@@ -258,8 +236,8 @@ export class Frost {
       method: Method.GET,
       headers: new Headers({
         'Content-Type': 'application/json',
-        token
-      })
+        token,
+      }),
     }
 
     const request = fetch(`${this.host}${Path.WORKS}/${workId}`, options)
@@ -280,8 +258,8 @@ export class Frost {
       method: Method.GET,
       headers: new Headers({
         'Content-Type': 'application/json',
-        token
-      })
+        token,
+      }),
     }
 
     const request = fetch(`${this.host}${Path.WORKS}`, options)
@@ -297,15 +275,13 @@ export class Frost {
       })
   }
 
-  getApiTokens(
-    token: string
-  ): Promise<{ readonly apiTokens: ReadonlyArray<string> }> {
+  getApiTokens(token: string): Promise<{ readonly apiTokens: ReadonlyArray<string> }> {
     const options = {
       method: Method.GET,
       headers: new Headers({
         'Content-Type': 'application/json',
-        token
-      })
+        token,
+      }),
     }
 
     const request = fetch(`${this.host}${Path.TOKENS}`, options)
@@ -326,8 +302,8 @@ export class Frost {
       method: Method.DEL,
       headers: new Headers({
         'Content-Type': 'application/json',
-        token
-      })
+        token,
+      }),
     }
 
     const request = fetch(`${this.host}${Path.TOKENS}/${tokenId}`, options)
@@ -342,8 +318,8 @@ export class Frost {
       method: Method.POST,
       headers: new Headers({
         'Content-Type': 'application/json',
-        token
-      })
+        token,
+      }),
     }
     const request = fetch(`${this.host}${Path.TOKENS}`, options)
 
@@ -352,15 +328,13 @@ export class Frost {
     throw await response.text()
   }
 
-  getProfile(
-    token: string
-  ): Promise<{ readonly createdAt: number; readonly verified: boolean }> {
+  getProfile(token: string): Promise<{ readonly createdAt: number; readonly verified: boolean }> {
     const options = {
       method: Method.GET,
       headers: new Headers({
         'Content-Type': 'application/json',
-        token
-      })
+        token,
+      }),
     }
 
     const request = fetch(`${this.host}${Path.ACCOUNTS_PROFILE}`, options)

@@ -10,7 +10,7 @@ export enum Path {
   WORKS = '/works',
   TOKENS = '/tokens',
   TOKENS_TOKENID = '/tokens/:tokenId',
-  ACCOUNTS_PROFILE = '/accounts/profile'
+  ACCOUNTS_PROFILE = '/accounts/profile',
 }
 
 export enum Method {
@@ -18,5 +18,5 @@ export enum Method {
   GET = 'get',
   PUT = 'put',
   DEL = 'delete',
-  ALL = 'all'
+  ALL = 'all',
 }
