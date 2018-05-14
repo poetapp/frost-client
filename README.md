@@ -1,5 +1,7 @@
 # Frost Client
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/poetapp/frost-client.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/poetapp/frost-client.svg?branch=master)](https://travis-ci.org/poetapp/frost-client)
 
 The Frost Client helps easily integrate your applications with the Frost API.
