@@ -40,7 +40,7 @@
     "@po.et/tslint-rules": "1.2.0",
     "@types/isomorphic-fetch": "0.0.34",
     "husky": "0.14.3",
-    "lint-staged": "7.1.0",
+    "lint-staged": "7.1.1",
     "prettier": "1.12.1",
     "ts-node": "6.0.3",
     "tslint-config-prettier": "1.12.0",
