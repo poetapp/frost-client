@@ -12,6 +12,8 @@
     "declaration": true
   },
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "./src/**/*.test.ts",
+    "./typings/**/*"
   ]
 }
