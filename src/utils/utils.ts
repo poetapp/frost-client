@@ -1,3 +1,5 @@
+import * as serialize from 'serialize-javascript'
+
 export enum Path {
   HOST = 'http://localhost:3000',
   ACCOUNTS = '/accounts',
@@ -20,3 +22,5 @@ export enum Method {
   DEL = 'delete',
   ALL = 'all',
 }
+
+export const StringifySecure = (data: object) => serialize(data, { isJSON: true })

@@ -1,6 +1,6 @@
 import { WorkAttributes } from '@po.et/poet-js'
 import * as fetch from 'isomorphic-fetch'
-import { Path, Method } from './utils/utils'
+import { Path, Method, StringifySecure } from './utils/utils'
 
 export interface Configuration {
   readonly host: string
@@ -37,7 +37,7 @@ export class Frost {
       headers: new Headers({
         'Content-Type': 'application/json',
       }),
-      body: JSON.stringify({
+      body: StringifySecure({
         email: email || this.email,
         password: password || this.password,
       }),
@@ -64,7 +64,7 @@ export class Frost {
       headers: new Headers({
         'Content-Type': 'application/json',
       }),
-      body: JSON.stringify({
+      body: StringifySecure({
         email: email || this.email,
         password: password || this.password,
       }),
@@ -132,7 +132,7 @@ export class Frost {
       headers: new Headers({
         'Content-Type': 'application/json',
       }),
-      body: JSON.stringify({
+      body: StringifySecure({
         email: email || this.email,
       }),
     }
@@ -157,7 +157,7 @@ export class Frost {
         'Content-Type': 'application/json',
         token,
       }),
-      body: JSON.stringify({
+      body: StringifySecure({
         password,
         oldPassword,
       }),
@@ -182,7 +182,7 @@ export class Frost {
         'Content-Type': 'application/json',
         token,
       }),
-      body: JSON.stringify({
+      body: StringifySecure({
         password,
       }),
     }
@@ -207,7 +207,7 @@ export class Frost {
         'Content-Type': 'application/json',
         token,
       }),
-      body: JSON.stringify(work),
+      body: StringifySecure(work),
     }
 
     const request = fetch(`${this.host}${Path.WORKS}`, options)
