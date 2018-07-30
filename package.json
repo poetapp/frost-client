@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/poetapp/frost-client#readme",
   "dependencies": {
-    "@po.et/poet-js": "1.2.0",
+    "@po.et/poet-js": "2.0.0",
     "es6-promise": "4.2.4",
     "isomorphic-fetch": "2.2.1",
     "serialize-javascript": "1.5.0"
