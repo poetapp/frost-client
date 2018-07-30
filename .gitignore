@@ -5,3 +5,5 @@ dist
 temp.text
 *.log
 dist
+.coverage
+.nyc_output
