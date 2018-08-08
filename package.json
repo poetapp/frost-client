@@ -13,7 +13,8 @@
     "coverage": "nyc --report-dir ./.coverage npm run test:unit",
     "precommit": "lint-staged",
     "compile": "tsc",
-    "prepublish": "npm run compile"
+    "prepublish": "npm run compile",
+    "semantic-release": "semantic-release"
   },
   "lint-staged": {
     "*.ts": [
@@ -48,6 +49,7 @@
     "nyc": "github:poetapp/nyc#fbc2ed1",
     "prettier": "1.14.1",
     "riteway": "2.0.4",
+    "semantic-release": "15.9.6",
     "sinon": "6.0.1",
     "ts-node": "7.0.0",
     "tslint-config-prettier": "1.14.0",
