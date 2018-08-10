@@ -49,7 +49,7 @@
     "nyc": "github:poetapp/nyc#fbc2ed1",
     "prettier": "1.14.2",
     "riteway": "2.0.4",
-    "semantic-release": "15.9.7",
+    "semantic-release": "15.9.8",
     "sinon": "6.0.1",
     "ts-node": "7.0.0",
     "tslint-config-prettier": "1.14.0",
