@@ -58,7 +58,6 @@ export class Frost {
 
   login(email?: string, password?: string): Promise<{ readonly token: string }> {
     if (!this.host) throw new Error('Should set the host url')
-
     const options = {
       method: Method.POST,
       headers: new Headers({
