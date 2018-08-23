@@ -1,7 +1,7 @@
 {
   "name": "@po.et/frost-client",
   "version": "0.1.8",
-  "description": "Po.et - Frost client",
+  "description": "The Frost Client helps easily integrate your applications with the Frost API.",
   "main": "dist/Frost.js",
   "types": "dist/Frost.d.ts",
   "scripts": {
@@ -26,13 +26,10 @@
     "type": "git",
     "url": "git+https://github.com/poetapp/frost-client.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/poetapp/frost-client/issues"
   },
-  "homepage": "https://github.com/poetapp/frost-client#readme",
   "dependencies": {
     "@po.et/poet-js": "2.0.0",
     "es6-promise": "4.2.4",
