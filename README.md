@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/poetapp/frost-client.svg?branch=master)](https://travis-ci.org/poetapp/frost-client)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-The Frost Client helps easily integrate your applications with the Frost API.
+Frost Client helps you to easily integrate your applications with Po.et's Frost API.
 
 ## Index
 
