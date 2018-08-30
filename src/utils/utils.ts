@@ -23,4 +23,10 @@ export enum Method {
   ALL = 'all',
 }
 
+export enum Network {
+  MAINNET = 'mainnet',
+  TESTNET = 'testnet',
+}
+
 export const StringifySecure = (data: object) => serialize(data, { isJSON: true })
+export const isEmptyObject = (o: object) => Object.keys(o).length === 0

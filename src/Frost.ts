@@ -1,6 +1,6 @@
 import { WorkAttributes } from '@po.et/poet-js'
 import * as fetch from 'isomorphic-fetch'
-import { Path, Method, StringifySecure } from './utils/utils'
+import { Path, Method, Network, StringifySecure, isEmptyObject } from './utils/utils'
 
 export interface Configuration {
   readonly host: string
@@ -8,6 +8,15 @@ export interface Configuration {
   readonly password?: string
   readonly timeout?: number
 }
+
+export const getOptions = (method: Method, headers = {}, body?: object): RequestInit => ({
+  method,
+  headers: new Headers({
+    'Content-Type': 'application/json',
+    ...headers,
+  }),
+  ...(body && !isEmptyObject(body) ? { body: StringifySecure(body) } : {}),
+})
 
 export class Frost {
   private readonly email: string
@@ -305,14 +314,8 @@ export class Frost {
     throw await response.text()
   }
 
-  async createApiToken(token: string): Promise<{ readonly apiToken: string }> {
-    const options = {
-      method: Method.POST,
-      headers: new Headers({
-        'Content-Type': 'application/json',
-        token,
-      }),
-    }
+  async createApiToken(token: string, network?: Network): Promise<{ readonly apiToken: string }> {
+    const options = getOptions(Method.POST, { token }, { network })
     const request = fetch(`${this.host}${Path.TOKENS}`, options)
 
     const response = await Promise.race([request, this.timeoutPromise()])
