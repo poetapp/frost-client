@@ -49,6 +49,8 @@ const { Frost } = require('@po.et/frost-client')
 
 ### Initialize
 
+You will need a token for Frost API, which you can obtain from [frost.po.et](https://frost.po.et).
+
 ```javascript
 import { Frost } from '@po.et/frost-client'
 
@@ -56,6 +58,8 @@ const config = {
   host: 'https://api.frost.po.et', // required
   timeout: 10 // default 10 seconds
 }
+
+const token = YOUR_FROST_API_TOKEN
 
 const frost = new Frost(config)
 ```
