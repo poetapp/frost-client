@@ -5,22 +5,22 @@ import { StringifySecure, isEmptyObject } from './utils'
 describe('StringifySecure', async (should: any) => {
   const { assert } = should()
   assert({
-    given: 'empty object',
-    should: 'return empty object in string',
+    given: 'an empty object',
+    should: 'return an empty object as a string',
     actual: StringifySecure({}),
     expected: '{}',
   })
 
   assert({
-    given: 'object',
-    should: 'return object as a string',
+    given: 'an object',
+    should: 'return the object as a string',
     actual: StringifySecure({ key: 'value', key2: 'value2' }),
     expected: '{"key":"value","key2":"value2"}',
   })
 
   assert({
-    given: 'object with undefined values',
-    should: 'return empty object as a string',
+    given: 'an object with only undefined values',
+    should: 'return an empty object as a string',
     actual: StringifySecure({ key: undefined, key2: undefined }),
     expected: '{}',
   })
@@ -34,7 +34,7 @@ describe('isEmptyObject', async (should: any) => {
     const expected = true
 
     assert({
-      given: 'empty object',
+      given: 'an empty object',
       should: 'return true',
       actual,
       expected,
@@ -46,7 +46,7 @@ describe('isEmptyObject', async (should: any) => {
     const expected = false
 
     assert({
-      given: 'object with one key',
+      given: 'an object with one key',
       should: 'return false',
       actual,
       expected,
