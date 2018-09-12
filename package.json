@@ -35,7 +35,7 @@
     "url": "https://github.com/poetapp/frost-client/issues"
   },
   "dependencies": {
-    "@po.et/poet-js": "3.0.4",
+    "@po.et/poet-js": "3.0.5",
     "es6-promise": "4.2.5",
     "isomorphic-fetch": "2.2.1",
     "serialize-javascript": "1.5.0"
