@@ -18,7 +18,8 @@
     "precommit": "lint-staged",
     "compile": "tsc",
     "prepublish": "npm run compile",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "lint-staged": {
     "*.ts": [
@@ -54,6 +55,7 @@
     "riteway": "2.0.7",
     "semantic-release": "15.9.16",
     "sinon": "6.3.4",
+    "travis-deploy-once": "5.0.8",
     "ts-node": "7.0.1",
     "tslint-config-prettier": "1.15.0",
     "tslint-plugin-prettier": "2.0.0",
