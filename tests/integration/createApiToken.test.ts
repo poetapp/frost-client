@@ -3,8 +3,7 @@ import { describe } from 'riteway'
 import { Frost } from '../../src/Frost'
 import { Path, Network } from '../../src/utils/utils'
 
-describe('Frost createApiToken()', async (should: any) => {
-  const { assert } = should('')
+describe('Frost createApiToken()', async (assert: any) => {
   const host = 'https://api.frost.po.et'
 
   const config = {

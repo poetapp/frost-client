@@ -2,9 +2,7 @@ import { describe } from 'riteway'
 import { getOptions } from './Frost'
 import { Method } from './utils/utils'
 
-describe('Frost getOptions()', async (should: any) => {
-  const { assert } = should('')
-
+describe('Frost getOptions()', async (assert: any) => {
   for (const method of Object.keys(Method)) {
     const currentMethod = (Method as any)[method]
     {
@@ -39,7 +37,9 @@ describe('Frost getOptions()', async (should: any) => {
     const token = { token: 'token' }
 
     const actual = getOptions(Method.POST, token).headers
-    const expected = { _headers: { 'content-type': ['application/json'], token: ['token'] } }
+    const expected = {
+      _headers: { 'content-type': ['application/json'], token: ['token'] },
+    }
 
     assert({
       given: 'the post method and an object containing a token key/value for a header',

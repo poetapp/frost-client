@@ -2,8 +2,7 @@ import { describe } from 'riteway'
 
 import { StringifySecure, isEmptyObject } from './utils'
 
-describe('StringifySecure', async (should: any) => {
-  const { assert } = should()
+describe('StringifySecure', async (assert: any) => {
   assert({
     given: 'an empty object',
     should: 'return an empty object as a string',
@@ -26,9 +25,7 @@ describe('StringifySecure', async (should: any) => {
   })
 })
 
-describe('isEmptyObject', async (should: any) => {
-  const { assert } = should()
-
+describe('isEmptyObject', async (assert: any) => {
   {
     const actual = isEmptyObject({})
     const expected = true
