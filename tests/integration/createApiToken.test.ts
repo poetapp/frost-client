@@ -75,14 +75,14 @@ describe('Frost createApiToken()', async (should: any) => {
       .reply(200, serverResponse)
 
     const frost = new Frost(config)
-    await frost.createApiToken(token, Network.MAINNET)
+    await frost.createApiToken(token, Network.LIVE)
 
     const actual = requestBody
-    const expected = { network: Network.MAINNET }
+    const expected = { network: Network.LIVE }
 
     assert({
-      given: `a request with the ${Network.MAINNET} network property`,
-      should: `have the request body an object with { network: '${Network.MAINNET}' }`,
+      given: `a request with the ${Network.LIVE} network property`,
+      should: `have the request body an object with { network: '${Network.LIVE}' }`,
       actual,
       expected,
     })
@@ -102,7 +102,7 @@ describe('Frost createApiToken()', async (should: any) => {
 
     try {
       await frost.createApiToken(token)
-    } catch(e) {
+    } catch (e) {
       actual = typeof e
     }
 
