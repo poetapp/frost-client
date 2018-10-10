@@ -2,9 +2,7 @@ import { describe } from 'riteway'
 import { getOptions } from './Frost'
 import { Method } from './utils/utils'
 
-describe('Frost getOptions()', async (should: any) => {
-  const { assert } = should('')
-
+describe('Frost getOptions()', async (assert: any) => {
   for (const method of Object.keys(Method)) {
     const currentMethod = (Method as any)[method]
     {
@@ -15,8 +13,8 @@ describe('Frost getOptions()', async (should: any) => {
       }
 
       assert({
-        given: `getOptions with the method ${currentMethod}`,
-        should: `return with the method: '${currentMethod}' and the header with 'Content-Type': 'application/json'`,
+        given: `the ${currentMethod} method`,
+        should: `return an object with the method '${currentMethod}' and the header 'Content-Type': 'application/json'`,
         actual,
         expected,
       })
@@ -28,8 +26,8 @@ describe('Frost getOptions()', async (should: any) => {
     const expected = { _headers: { 'content-type': ['application/json'] } }
 
     assert({
-      given: 'getOptions with an object empty header',
-      should: `return the header with 'Content-Type': 'application/json'`,
+      given: 'the post method and an empty object for a header',
+      should: `return an object with the header 'Content-Type': 'application/json'`,
       actual,
       expected,
     })
@@ -39,11 +37,13 @@ describe('Frost getOptions()', async (should: any) => {
     const token = { token: 'token' }
 
     const actual = getOptions(Method.POST, token).headers
-    const expected = { _headers: { 'content-type': ['application/json'], token: ['token'] } }
+    const expected = {
+      _headers: { 'content-type': ['application/json'], token: ['token'] },
+    }
 
     assert({
-      given: 'getOptions with an object empty header',
-      should: `return the header with 'Content-Type': 'application/json' and the object token`,
+      given: 'the post method and an object containing a token key/value for a header',
+      should: `return an object with the header 'Content-Type': 'application/json' and the token key/value`,
       actual,
       expected,
     })
@@ -54,8 +54,8 @@ describe('Frost getOptions()', async (should: any) => {
     const expected: any = undefined
 
     assert({
-      given: 'getOptions with an object empty body',
-      should: 'be body undefined',
+      given: 'the post method and an empty object for a body',
+      should: 'return undefined for the body',
       actual,
       expected,
     })
@@ -68,8 +68,8 @@ describe('Frost getOptions()', async (should: any) => {
     const expected = '{"network":"mainnet"}'
 
     assert({
-      given: 'getOptions with object network in the body',
-      should: 'return body with the objet network',
+      given: 'the post method and a network object for a body',
+      should: 'return a body with the network object',
       actual,
       expected,
     })

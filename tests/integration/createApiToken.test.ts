@@ -3,8 +3,7 @@ import { describe } from 'riteway'
 import { Frost } from '../../src/Frost'
 import { Path, Network } from '../../src/utils/utils'
 
-describe('Frost createApiToken()', async (should: any) => {
-  const { assert } = should('')
+describe('Frost createApiToken()', async (assert: any) => {
   const host = 'https://api.frost.po.et'
 
   const config = {
@@ -30,7 +29,7 @@ describe('Frost createApiToken()', async (should: any) => {
 
     assert({
       given: 'a status code of 200',
-      should: 'return the object with apiToken equal 1',
+      should: 'return an object with the expected apiToken',
       actual,
       expected,
     })
@@ -55,8 +54,8 @@ describe('Frost createApiToken()', async (should: any) => {
     const expected = {}
 
     assert({
-      given: 'a request without network property',
-      should: 'be the request body empty',
+      given: 'a request without a network property',
+      should: 'return an empty object for the request body',
       actual,
       expected,
     })
@@ -82,7 +81,7 @@ describe('Frost createApiToken()', async (should: any) => {
 
     assert({
       given: `a request with the ${Network.LIVE} network property`,
-      should: `have the request body an object with { network: '${Network.LIVE}' }`,
+      should: `return an object with { network: '${Network.LIVE}' } for the request body`,
       actual,
       expected,
     })
