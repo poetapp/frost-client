@@ -24,8 +24,8 @@ export enum Method {
 }
 
 export enum Network {
-  MAINNET = 'mainnet',
-  TESTNET = 'testnet',
+  LIVE = 'live',
+  TEST = 'test',
 }
 
 export const StringifySecure = (data: object) => serialize(data, { isJSON: true })
