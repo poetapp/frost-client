@@ -1,4 +1,3 @@
-import { WorkAttributes } from '@po.et/poet-js'
 import * as fetch from 'isomorphic-fetch'
 import { Path, Method, Network, StringifySecure, isEmptyObject } from './utils/utils'
 
@@ -7,6 +6,19 @@ export interface Configuration {
   readonly email?: string
   readonly password?: string
   readonly timeout?: number
+}
+
+export interface ClaimAttributes {
+  readonly [key: string]: string
+}
+
+export interface WorkAttributes extends ClaimAttributes {
+  readonly name: string
+  readonly datePublished: string
+  readonly dateCreated: string
+  readonly author: string
+  readonly tags?: string
+  readonly content: string
 }
 
 export const getOptions = (method: Method, headers = {}, body?: object): RequestInit => ({
