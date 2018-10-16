@@ -18,7 +18,7 @@ export interface WorkAttributes extends ClaimAttributes {
   readonly dateCreated: string
   readonly author: string
   readonly tags?: string
-  readonly content: string
+  readonly text: string
 }
 
 export const getOptions = (method: Method, headers = {}, body?: object): RequestInit => ({
