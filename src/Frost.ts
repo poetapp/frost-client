@@ -47,7 +47,7 @@ export class Frost {
     return new Promise((resolve, reject) => {
       setTimeout(
         () => reject('That last request took too long. Please try again in a few seconds.'),
-        1000 * this.timeout
+        1000 * this.timeout,
       )
     })
   }
