@@ -77,7 +77,7 @@ async function createWork() {
       name: 'My first work in Frost',
       datePublished: '2017-11-24T00:38:41.595Z', // ISO date
       dateCreated: '2017-11-24T00:38:41.595Z', // ISO date
-      author: 'Me'
+      author: 'Me',
       tags: 'Frost,the best', // tags separation by commas
       content: 'The best content'
     }
