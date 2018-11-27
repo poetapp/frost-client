@@ -5,7 +5,7 @@
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Join the chat at https://gitter.im/poetapp/Lobby](https://badges.gitter.im/poetapp/Lobby.svg)](https://gitter.im/poetapp/Lobby)
 
-Frost Client helps you to easily integrate your applications with Po.et's Frost API.
+Frost Client helps you to easily integrate your applications with [Po.et's API](https://docs.poetnetwork.net/use-poet/poet-api.html).
 
 ## Index
 
@@ -49,17 +49,17 @@ const { Frost } = require('@po.et/frost-client')
 
 ### Initialize
 
-You will need a token for Frost API, which you can obtain from [frost.po.et](https://frost.po.et).
+You will need a token to access the Po.et API, which you can obtain from [explorer.poetnetwork.net](https://explorer.poetnetwork.net).
 
 ```javascript
 import { Frost } from '@po.et/frost-client'
 
 const config = {
-  host: 'https://api.frost.po.et', // required
+  host: 'https://explorer.poetnetwork.net', // required
   timeout: 10 // default 10 seconds
 }
 
-const token = YOUR_FROST_API_TOKEN
+const token = YOUR_POET_API_TOKEN
 
 const frost = new Frost(config)
 ```
@@ -67,7 +67,7 @@ const frost = new Frost(config)
 ## Methods
 
 ### Create Work
-Returns a promise with Frost's response. Throws in case of errors.
+Returns a promise with the API's response. Throws in case of errors.
 
 ```javascript
 
@@ -96,7 +96,7 @@ createWork()
 
 ### Get Work By ID
 
-Returns a promise with Frost's response. Throws in case of errors.
+Returns a promise with the API's response. Throws in case of errors.
 
 ```javascript
 async function getWork () {
@@ -113,7 +113,7 @@ getWork()
 
 ### Get All Works
 
-Returns a promise with Frost's response. Throws in case of errors.
+Returns a promise with the API's response. Throws in case of errors.
 
 ```javascript
 const getAllWorks = async () => {
