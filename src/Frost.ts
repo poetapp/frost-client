@@ -68,7 +68,7 @@ export class Frost {
 
     return Promise.race([request, this.timeoutPromise()])
       .then(async (value: any) => {
-        if (value.ok) return await value.json()
+        if (value.ok) return value.json()
 
         throw await value.text()
       })
@@ -95,7 +95,7 @@ export class Frost {
 
     return Promise.race([request, this.timeoutPromise()])
       .then(async (value: any) => {
-        if (value.ok) return await value.json()
+        if (value.ok) return value.json()
 
         throw await value.text()
       })
@@ -117,7 +117,7 @@ export class Frost {
 
     return Promise.race([request, this.timeoutPromise()])
       .then(async (value: any) => {
-        if (value.ok) return await value.text()
+        if (value.ok) return value.text()
 
         throw await value.text()
       })
@@ -138,7 +138,7 @@ export class Frost {
 
     return Promise.race([request, this.timeoutPromise()])
       .then(async (value: any) => {
-        if (value.ok) return await value.json()
+        if (value.ok) return value.json()
 
         throw await value.text()
       })
@@ -162,7 +162,7 @@ export class Frost {
 
     return Promise.race([request, this.timeoutPromise()])
       .then(async (value: any) => {
-        if (value.ok) return await value.text()
+        if (value.ok) return value.text()
 
         throw await value.text()
       })
@@ -187,7 +187,7 @@ export class Frost {
     const request = fetch(`${this.host}${Path.PASSWORD_CHANGE}`, options)
     return Promise.race([request, this.timeoutPromise()])
       .then(async (value: any) => {
-        if (value.ok) return await value.text()
+        if (value.ok) return value.text()
 
         throw await value.text()
       })
@@ -212,7 +212,7 @@ export class Frost {
 
     return Promise.race([request, this.timeoutPromise()])
       .then(async (value: any) => {
-        if (value.ok) return await value.json()
+        if (value.ok) return value.json()
 
         throw await value.text()
       })
@@ -235,7 +235,7 @@ export class Frost {
 
     return Promise.race([request, this.timeoutPromise()])
       .then(async (value: any) => {
-        if (value.ok) return await value.json()
+        if (value.ok) return value.json()
 
         throw await value.text()
       })
@@ -257,7 +257,7 @@ export class Frost {
 
     return Promise.race([request, this.timeoutPromise()])
       .then(async (value: any) => {
-        if (value.ok) return await value.json()
+        if (value.ok) return value.json()
 
         throw await value.text()
       })
@@ -279,7 +279,7 @@ export class Frost {
 
     return Promise.race([request, this.timeoutPromise()])
       .then(async (value: any) => {
-        if (value.ok) return await value.json()
+        if (value.ok) return value.json()
 
         throw await value.text()
       })
@@ -301,7 +301,7 @@ export class Frost {
 
     return Promise.race([request, this.timeoutPromise()])
       .then(async (value: any) => {
-        if (value.ok) return await value.json()
+        if (value.ok) return value.json()
 
         throw await value.text()
       })
@@ -322,7 +322,7 @@ export class Frost {
     const request = fetch(`${this.host}${Path.TOKENS}/${tokenId}`, options)
 
     const response = await Promise.race([request, this.timeoutPromise()])
-    if (response.ok) return await response.text()
+    if (response.ok) return response.text()
     throw await response.text()
   }
 
@@ -331,7 +331,7 @@ export class Frost {
     const request = fetch(`${this.host}${Path.TOKENS}`, options)
 
     const response = await Promise.race([request, this.timeoutPromise()])
-    if (response.ok) return await response.json()
+    if (response.ok) return response.json()
     throw await response.text()
   }
 
@@ -348,7 +348,7 @@ export class Frost {
 
     return Promise.race([request, this.timeoutPromise()])
       .then(async (value: any) => {
-        if (value.ok) return await value.json()
+        if (value.ok) return value.json()
 
         throw await value.text()
       })
