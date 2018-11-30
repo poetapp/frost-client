@@ -127,3 +127,7 @@ const getAllWorks = async () => {
 getAllWorks()
 
 ```
+
+## [Contributing](https://github.com/poetapp/documentation/blob/master/CONTRIBUTING.md)
+
+## [Security](https://github.com/poetapp/documentation/blob/master/SECURITY.md)
