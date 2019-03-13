@@ -1,6 +1,6 @@
 # Frost Client
 
-[![Build Status](https://travis-ci.org/poetapp/frost-client.svg?branch=master)](https://travis-ci.org/poetapp/frost-client)
+[![CircleCI](https://circleci.com/gh/poetapp/frost-client.svg?style=svg)](https://circleci.com/gh/poetapp/frost-client)
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Join the chat at https://gitter.im/poetapp/Lobby](https://badges.gitter.im/poetapp/Lobby.svg)](https://gitter.im/poetapp/Lobby)
@@ -9,14 +9,18 @@ Frost Client helps you to easily integrate your applications with [Po.et's API](
 
 ## Index
 
-- [Getting Started](#getting-started)
+- [Frost Client](#frost-client)
+  - [Index](#index)
+  - [Getting Started](#getting-started)
     - [Install](#install)
     - [Import](#import)
     - [Initialize](#initialize)
-- [Methods](#methods)
+  - [Methods](#methods)
     - [Create Work](#create-work)
     - [Get Work By ID](#get-work-by-id)
     - [Get All Works](#get-all-works)
+  - [Contributing](#contributing)
+  - [Security](#security)
 
 ## Getting Started
 
