@@ -12,12 +12,12 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-{{ checksum "package-lock.json" }}
+          key: v1-{{ checksum "package.json" }}
       - run:
           name: Install deps
           command: npm install
       - save_cache:
-          key: v1-{{ checksum "package-lock.json" }}
+          key: v1-{{ checksum "package.json" }}
           paths:
             - ./node_modules
 
@@ -26,7 +26,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-{{ checksum "package-lock.json" }}
+          key: v1-{{ checksum "package.json" }}
       - run:
           name: Lint
           command: npm run lint
@@ -36,7 +36,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-{{ checksum "package-lock.json" }}
+          key: v1-{{ checksum "package.json" }}
       - run:
           name: Build dist
           command: npm run build
@@ -46,17 +46,22 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-{{ checksum "package-lock.json" }}
+          key: v1-{{ checksum "package.json" }}
       - run:
           name: Build dist
           command: npm run coverage
+      - store_artifacts:
+          path: .coverage
+      - store_test_results:
+          path: .coverage
+
 
   release:
     executor: base-node 
     steps:
       - checkout
       - restore_cache:
-          key: v1-{{ checksum "package-lock.json" }}
+          key: v1-{{ checksum "package.json" }}
       - run:
           name: Build dist
           command: npx semantic-release
