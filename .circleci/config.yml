@@ -48,13 +48,12 @@ jobs:
       - restore_cache:
           key: v1-{{ checksum "package.json" }}
       - run:
-          name: Build dist
+          name: Coverage
           command: npm run coverage
       - store_artifacts:
           path: .coverage
       - store_test_results:
           path: .coverage
-
 
   release:
     executor: base-node 
@@ -63,7 +62,7 @@ jobs:
       - restore_cache:
           key: v1-{{ checksum "package.json" }}
       - run:
-          name: Build dist
+          name: Semantic-release
           command: npx semantic-release
 
 workflows:
