@@ -4,7 +4,7 @@ executors:
     environment:
       FOO: bar
     docker:
-      - image: poetapp/base:10.14.2-alpine 
+      - image: poetapp/base:10.14.2-alpine
 
 jobs:
   build:
@@ -32,7 +32,7 @@ jobs:
           command: npm run lint
 
   package:
-    executor: base-node 
+    executor: base-node
     steps:
       - checkout
       - restore_cache:
@@ -41,22 +41,8 @@ jobs:
           name: Build dist
           command: npm run build
 
-  coverage:
-    executor: base-node 
-    steps:
-      - checkout
-      - restore_cache:
-          key: v1-{{ checksum "package.json" }}
-      - run:
-          name: Coverage
-          command: npm run coverage
-      - store_artifacts:
-          path: .coverage
-      - store_test_results:
-          path: .coverage
-
   release:
-    executor: base-node 
+    executor: base-node
     steps:
       - checkout
       - restore_cache:
@@ -74,9 +60,6 @@ workflows:
           requires:
             - build
       - package:
-          requires:
-            - build
-      - coverage:
           requires:
             - build
       - release:
