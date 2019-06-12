@@ -13,6 +13,7 @@ export enum Path {
   TOKENS = '/tokens',
   TOKENS_TOKENID = '/tokens/:tokenId',
   ACCOUNTS_PROFILE = '/accounts/profile',
+  ARCHIVES = '/archives',
 }
 
 export enum Method {

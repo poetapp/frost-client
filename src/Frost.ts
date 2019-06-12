@@ -356,4 +356,22 @@ export class Frost {
         throw e
       })
   }
+
+  async postArchive(token: string, file: any) {
+    const options = {
+      method: Method.POST,
+      headers: new Headers({
+        token,
+      }),
+      body: file,
+    }
+
+    const result = await fetch(`${this.host}${Path.ARCHIVES}`, options)
+
+    if (!result.ok)
+      throw await result.text()
+
+    return result.json()
+  }
+
 }

@@ -132,6 +132,39 @@ getAllWorks()
 
 ```
 
+### Post Archive
+
+Upload a file to Frost.
+
+Example using NodeJS:
+
+```js
+const readStream = createReadStream('path/to/file.ext')
+const { archiveUrl } = await frostClient.postArchive(apiKey, readStream)
+```
+
+Or, if in a browser:
+
+```js
+const file = document.querySelector('input[type=file]').files[0]
+const { archiveUrl } = await frostClient.postArchive(apiKey, file)
+```
+
+You can then use this `archiveUrl` as part of the claim that will be submitted to Frost with `createWork`:
+
+```js
+const work = {
+  name: 'My first work in Frost',
+  datePublished: '2017-11-24T00:38:41.595Z', 
+  dateCreated: '2017-11-24T00:38:41.595Z', 
+  author: 'Me',
+  tags: 'Frost,the best', 
+  archiveUrl, // omit the content field
+}
+
+const { workId } = await frost.createWork(token, work)
+```
+
 ## [Contributing](https://github.com/poetapp/documentation/blob/master/CONTRIBUTING.md)
 
 ## [Security](https://github.com/poetapp/documentation/blob/master/SECURITY.md)
