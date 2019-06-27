@@ -13,9 +13,8 @@
     "test:integration": "ts-node --files tests/integration/index.ts",
     "precommit": "lint-staged",
     "compile": "tsc",
-    "prepublish": "npm run compile",
-    "semantic-release": "semantic-release",
-    "travis-deploy-once": "travis-deploy-once"
+    "prepublishOnly": "npm run compile",
+    "semantic-release": "semantic-release"
   },
   "lint-staged": {
     "*.ts": [
