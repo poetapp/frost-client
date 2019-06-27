@@ -1,8 +1,6 @@
 version: 2.1
 executors:
   base-node:
-    environment:
-      FOO: bar
     docker:
       - image: poetapp/base:10.14.2-alpine
 
@@ -12,12 +10,12 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-{{ checksum "package.json" }}
+          key: v2-{{ checksum "package.json" }}
       - run:
           name: Install deps
           command: npm install
       - save_cache:
-          key: v1-{{ checksum "package.json" }}
+          key: v2-{{ checksum "package.json" }}
           paths:
             - ./node_modules
 
@@ -26,7 +24,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-{{ checksum "package.json" }}
+          key: v2-{{ checksum "package.json" }}
       - run:
           name: Lint
           command: npm run lint
@@ -36,7 +34,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-{{ checksum "package.json" }}
+          key: v2-{{ checksum "package.json" }}
       - run:
           name: Build dist
           command: npm run build
@@ -46,7 +44,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-{{ checksum "package.json" }}
+          key: v2-{{ checksum "package.json" }}
       - run:
           name: Semantic-release
           command: npx semantic-release
