@@ -1,6 +1,6 @@
 {
   "name": "@po.et/frost-client",
-  "version": "2.4.4",
+  "version": "2.4.5",
   "description": "Frost Client helps you to easily integrate your applications with Po.et's Frost API.",
   "main": "dist/Frost.js",
   "types": "dist/Frost.d.ts",
