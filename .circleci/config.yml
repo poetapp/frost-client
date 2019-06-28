@@ -10,12 +10,15 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v2-{{ checksum "package.json" }}
+          keys:
+            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - node-v1-{{ .Branch }}-
+            - node-v1-
       - run:
           name: Install deps
           command: npm install
       - save_cache:
-          key: v2-{{ checksum "package.json" }}
+          key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
 
@@ -24,7 +27,10 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v2-{{ checksum "package.json" }}
+          keys:
+            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - node-v1-{{ .Branch }}-
+            - node-v1-
       - run:
           name: Lint
           command: npm run lint
@@ -34,17 +40,30 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v2-{{ checksum "package.json" }}
+          keys:
+            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - node-v1-{{ .Branch }}-
+            - node-v1-
       - run:
           name: Build dist
           command: npm run build
+      - save_cache:
+          key: dist-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - ./dist
 
   release:
     executor: base-node
     steps:
       - checkout
       - restore_cache:
-          key: v2-{{ checksum "package.json" }}
+          keys:
+            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - node-v1-{{ .Branch }}-
+            - node-v1-
+            - dist-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - dist-v1-{{ .Branch }}-
+            - dist-v1-
       - run:
           name: Semantic-release
           command: npx semantic-release
