@@ -1,8 +1,14 @@
-tests/
+.circleci/
+.github/
 coverage/
 src/
-*.log
+tests/
 .editorconfig
+.releaserc.json
+.renovaterc.json
+.nvmrc
+.nycrc
 .vscode
+*.log
 tsconfig.json
 tslint.json
