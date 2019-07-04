@@ -140,14 +140,14 @@ Example using NodeJS:
 
 ```js
 const readStream = createReadStream('path/to/file.ext')
-const { archiveUrl } = await frostClient.postArchive(apiKey, readStream)
+const [{ archiveUrl }] = await frostClient.postArchive(apiKey, readStream)
 ```
 
 Or, if in a browser:
 
 ```js
 const file = document.querySelector('input[type=file]').files[0]
-const { archiveUrl } = await frostClient.postArchive(apiKey, file)
+const [{ archiveUrl }] = await frostClient.postArchive(apiKey, file)
 ```
 
 You can then use this `archiveUrl` as part of the claim that will be submitted to Frost with `createWork`:
